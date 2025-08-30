@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amit Bind</title>
+  <meta name="description" content="Personal portfolio of John Doe — Developer & Designer. Projects, skills, and contact information." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================
+       CSS: Dark Portfolio
+       Single-file (HTML + CSS)
+       ===================== */
+
+    /* ---------- CSS Variables ---------- */
+    :root {
+      --bg: #0b0f14;
+      --bg-elev: #0f141b;
+      --card: #121824;
+      --muted: #9aa6b2;
+      --text: #e6edf3;
+      --brand: #7c5cff;
+      --brand-2: #00d1b2;
+      --ring: rgba(124, 92, 255, 0.45);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --radius-lg: 24px;
+      --maxw: 1150px;
+    }
+
+    /* ---------- Reset & Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(124,92,255,0.15), transparent 60%),
+                  radial-gradient(900px 500px at -10% 20%, rgba(0,209,178,0.12), transparent 50%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    p { color: #cbd5e1; }
+    .container { width: min(100% - 32px, var(--maxw)); margin-inline: auto; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+    /* ---------- Topbar / Nav ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(120%) blur(8px);
+      background: linear-gradient(to bottom, rgba(11,15,20,0.85), rgba(11,15,20,0.55));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; }
+    .brand-badge { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow); }
+    .nav-links { display: flex; gap: 18px; align-items: center; }
+    .nav-links a { padding: 8px 12px; border-radius: 999px; color: var(--muted); transition: 150ms ease; }
+    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+
+    /* Mobile menu (checkbox hack) */
+    #nav-toggle { display: none; }
+    .hamburger { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); align-items: center; justify-content: center; }
+    .hamburger span { width: 20px; height: 2px; background: var(--text); display: block; position: relative; }
+    .hamburger span::before, .hamburger span::after { content: ""; position: absolute; left: 0; width: 100%; height: 2px; background: var(--text); }
+    .hamburger span::before { top: -6px; }
+    .hamburger span::after { top: 6px; }
+    @media (max-width: 860px) {
+      .hamburger { display: inline-flex; }
+      .nav-links { position: absolute; left: 16px; right: 16px; top: 64px; flex-direction: column; background: var(--bg-elev); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 10px; display: none; }
+      #nav-toggle:checked ~ .nav-links { display: flex; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 72px 0 48px; display: grid; gap: 32px; grid-template-columns: 1.2fr .8fr; align-items: center; }
+    .hero h1 { font-size: clamp(30px, 4vw, 44px); line-height: 1.15; margin: 0 0 12px; }
+    .hero .lead { font-size: clamp(16px, 2.2vw, 18px); color: #b6c2cf; margin: 0 0 22px; }
+    .cta { display: inline-flex; gap: 12px; align-items: center; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); background: linear-gradient(180deg, #192030, #121824); color: var(--text); font-weight: 600; transition: 150ms ease; box-shadow: var(--shadow); }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.2); }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); border-color: transparent; }
+    .stat-row { display: flex; gap: 18px; margin-top: 26px; flex-wrap: wrap; }
+    .stat { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 16px 18px; min-width: 160px; text-align: center; }
+    .stat b { font-size: 22px; display: block; }
+    .hero-art { aspect-ratio: 1 / 1; border-radius: var(--radius-lg); background: radial-gradient(400px 400px at 20% 20%, rgba(124,92,255,0.2), transparent 60%), linear-gradient(180deg, #121721, #0b0f14); border: 1px solid rgba(255,255,255,0.06); box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .glow { position: absolute; inset: -40%; background: radial-gradient(circle at 50% 50%, rgba(0,209,178,0.22), transparent 55%); filter: blur(40px); animation: drift 12s linear infinite; }
+    @keyframes drift { from { transform: translateX(-10%);} 50% { transform: translateX(10%);} to { transform: translateX(-10%);} }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- Section Base ---------- */
+    section { padding: 64px 0; }
+    .section-title { font-size: 28px; margin: 0 0 8px; }
+    .section-sub { color: var(--muted); margin-bottom: 24px; }
+
+    /* ---------- About ---------- */
+    .about { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: start; }
+    .about-card { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 20px; }
+    .tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .tag { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(124,92,255,0.12); border: 1px solid rgba(124,92,255,0.35); color: #d9d6ff; }
+    @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+
+    /* ---------- Skills ---------- */
+    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .skill { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 16px; }
+    .skill h4 { margin: 0 0 8px; font-size: 16px; }
+    .meter { height: 8px; border-radius: 999px; background: #1b2432; overflow: hidden; }
+    .meter > span { display: block; height: 100%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); }
+    @media (max-width: 1000px) { .skills-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .skills-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Projects ---------- */
+    .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+    .card .thumb { aspect-ratio: 16 / 9; background: linear-gradient(135deg, rgba(124,92,255,0.25), rgba(0,209,178,0.25)); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .card .body { padding: 16px; flex: 1; }
+    .card h4 { margin: 0 0 8px; font-size: 18px; }
+    .card p { margin: 0 0 12px; }
+    .card .actions { display: flex; gap: 10px; padding: 0 16px 16px; }
+    .chip { padding: 6px 10px; border-radius: 999px; background: #1b2432; color: #c8d1dc; font-size: 12px; border: 1px solid rgba(255,255,255,0.06); }
+    @media (max-width: 1000px) { .projects { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .projects { grid-template-columns: 1fr; } }
+
+    /* ---------- Contact ---------- */
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .contact-card { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 18px; }
+    form { display: grid; gap: 12px; }
+    label { font-size: 14px; color: var(--muted); }
+    input, textarea {
+      width: 100%; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08); background: #0f141b; color: var(--text);
+      outline: none; transition: 120ms ease;
+    }
+    input:focus, textarea:focus { border-color: var(--ring); box-shadow: 0 0 0 3px var(--ring); }
+    textarea { min-height: 120px; resize: vertical; }
+    @media (max-width: 860px) { .contact-wrap { grid-template-columns: 1fr; } }
+
+    /* ---------- Footer ---------- */
+    footer { padding: 32px 0 50px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.06); margin-top: 40px; }
+    .footer-row { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+    .social { display: flex; gap: 12px; }
+    .social a { padding: 8px 12px; border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; }
+    @media (max-width: 640px) { .footer-row { flex-direction: column; } }
+
+    /* ---------- Utilities ---------- */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+    .muted { color: var(--muted); }
+    .accent { color: #d8d2ff; }
+    .accent1 {color : rgb(0, 213, 255) }
+    .pill { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: #cbd5e1; }
+    .spacer { height: 8px; }
+
+    /*my changes */
+   .dp-glow {
+    width: 340px;          /* medium size */
+    height: 340px;
+    border-radius: 50%;    /* round shape */
+    object-fit: cover;     /* photo crop adjust */
+    border: 3px solid var(--brand);
+    border-radius : none;
+    box-shadow: 0 0 15px rgba(98, 106, 255, 0.7), 
+                0 0 50px rgba(98, 106, 255, 0.4);
+                margin: 20px auto;        /* center */
+    display: block;           
+    background: transparent;
+    animation: dpPulse 4s ease-in-out infinite;
+  }
+
+/* glowing animation */
+@keyframes dpPulse {
+  0%   { box-shadow: 0 0 15px rgba(98, 106, 255, 0.6), 0 0 30px rgba(98, 106, 255, 0.3); }
+  50%  { box-shadow: 0 0 35px rgba(98, 106, 255, 1),   0 0 70px rgba(98, 106, 255, 0.6); }
+  100% { box-shadow: 0 0 15px rgba(98, 106, 255, 0.6), 0 0 30px rgba(98, 106, 255, 0.3); }
+}
+
+  </style>
+</head>
+<body>
+  <!-- ======= Header / Nav ======= -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="dp.jpg" aria-label="Home">
+        <span class="brand-badge" aria-hidden="true"></span>
+        <span>Amit Bind</span>
+      </a>
+
+      <input type="checkbox" id="nav-toggle" />
+      <label class="hamburger" for="nav-toggle" aria-label="Menu" aria-controls="primary-navigation" aria-expanded="false">
+        <span></span>
+      </label>
+
+      <nav class="nav-links" id="primary-navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="resumeamit.pdf" download class="btn-cv">Download CV</a>
+        <a class="pill" href="mailto:amitbind1080K@gmail.com">Hire Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======= Hero ======= -->
+  <main id="home" class="container hero">
+    <div>
+      <h1 style="font-size: 45px;">Hi, i Am <span class="accent"><br>Amit Bind</span></h1> 
+      <h2>And I'm a <span class="accent1">Coder.</span></h2>
+      <p class="lead">I am a dedicated BCA student at GNIOT Institute of Professional Studies with a strong interest in programming and technology. I have gained hands-on experience in languages such as C, C++, and Python.</p>
+
+      <div class="cta">
+        <a class="btn primary" href="#projects">View Projects</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>Fresher</b> Years Experience</div>
+        <div class="stat"><b>0</b> Completed Projects</div>
+        <div class="stat"><b>59</b> Problem solved</div>
+      </div>
+    </div>
+
+    <!-- <div class="hero-art" aria-hidden="true"> -->
+      <img src="amitdp.jpg" alt="Amit Bind" class="dp-glow">
+    <!-- </div> -->
+  </main>
+
+  <!-- ======= About ======= -->
+  <section id="about">
+    <div class="container about">
+      <div class="about-card">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-sub">Developer • Ai Engineer  • Problem Solver</p>
+        <p>
+          I am Amit Bind, currently pursuing a Bachelor of Computer Applications (BCA) at 
+        GNIOT Institute of Professional Studies, Greater Noida.  
+        My focus is on building a strong foundation in programming, data structures, 
+        and software development. I enjoy solving logical problems, working on 
+        projects in C++ and Python, and continuously learning new technologies.
+        </p>
+        <div class="tags">
+          <span class="tag">C++</span>
+          <span class="tag">Python</span>
+          <span class="tag">DSA</span>
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="about-card">
+          <h3>What I Do</h3>
+          <p class="muted">“I am a BCA student exploring programming, working on problem-solving with C++ and Python, and building projects to apply my knowledge in OOPs and DSA.”</p>
+        </div>
+        <div class="about-card">
+          <h3>Currently Learning</h3>
+          <p class="muted">“Currently learning C, C++, Python, and focusing on DSA and OOPs to strengthen my problem-solving skills.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Skills ======= -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-sub">A snapshot of my day‑to‑day toolkit</p>
+      <div class="skills-grid">
+        <div class="skill">
+          <h4>C++</h4>
+          <div class="meter" aria-label="C++ proficiency" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><span style="width:79%"></span></div>
+        </div>
+        <div class="skill">
+          <h4>Python</h4>
+          <div class="meter" aria-label="Pyhton proficiency" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"><span style="width:75%"></span></div>
+        </div>
+        <div class="skill">
+          <h4>DSA</h4>
+          <div class="meter" aria-label="DSA proficiency" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"><span style="width:48%"></span></div>
+        </div>
+        <div class="skill">
+          <h4>HTML5/CSS</h4>
+          <div class="meter" aria-label="HTML/CSS proficiency" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span style="width:90%"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Projects ======= -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">A few things I've built recently</p>
+
+      <div class="projects">
+        <!-- Project 1 -->
+        <article class="card">
+          <div class="thumb">
+          </div>
+          <div class="body">
+            <h4>Soon...</h4>
+            <!-- <p>A blazing‑fast personal site with a custom design system and accessible components.</p>
+            <div class="tags">
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">A11y</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#" aria-label="Live demo">Live</a>
+            <a class="btn" href="#" aria-label="Source code">Code</a>
+          </div> -->
+        </article>
+
+        <!-- Project 2 -->
+        <article class="card">
+          <div class="thumb"></div>
+          <div class="body">
+            <h4>Soon...</h4>
+            <!-- <p>Modular admin dashboard with cards, charts placeholders, and dark theme.</p>
+            <div class="tags">
+              <span class="chip">Responsive</span>
+              <span class="chip">Design System</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#">Live</a>
+            <a class="btn" href="#">Code</a>
+          </div> -->
+        </article>
+
+        <!-- Project 3 -->
+        <article class="card">
+          <div class="thumb"></div>
+          <div class="body">
+            <h4>Soon...</h4>
+            <!-- <p>Reusable buttons, forms, and navigation built with semantic HTML and CSS.</p> -->
+            <div class="tags">
+              <!-- <span class="chip">Components</span>
+              <span class="chip">Scalable CSS</span> -->
+            </div>
+          </div>
+          <!-- <div class="actions">
+            <a class="btn" href="#">Live</a>
+            <a class="btn" href="#">Code</a>
+          </div> -->
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Contact ======= -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">Let's work together</p>
+
+      <div class="contact-wrap">
+        <div class="contact-card">
+          <h3>Message Me</h3>
+          <form action="https://formspree.io/f/xwpnvdqa" method="post" onsubmit="return true">
+            <div>
+              <label for="name">Your Name</label>
+              <input id="name" name="name" type="text" placeholder="Enter Name" required>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required>
+            </div>
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Hi Amit, I have a project in mind..."></textarea>
+            </div>
+            <button class="btn primary" type="submit">Send</button>
+          </form>
+        </div>
+
+        <div class="contact-card">
+          <h3>Reach Me</h3>
+          <p class="muted">Email: <a href="mailto:hello@example.com">amitbind1080k@gmail.com</a></p>
+          <p class="muted">Location: Greater Noida</p>
+          <div class="spacer"></div>
+          <div class="social">
+            <a href="https://github.com/amitedit56" aria-label="GitHub">GitHub</a>
+            <a href="https://www.linkedin.com/in/amit-bind-ba305a331?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn">LinkedIn</a>
+            <a href="https://leetcode.com/u/amitbind03/" aria-label="GitHub">LeetCode</a>
+            <a href="https://www.instagram.com/amitbind03?igsh=MW1xcHRjYmI2aGZ6dg==" aria-label="Instagram">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="container footer-row">
+      <small>© <span id="year"></span> Amit Bind. All rights reserved.</small>
+      <div class="social">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year for the footer
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
