@@ -1,7 +1,7 @@
 <!-- ------------------------ HEADER ------------------------ -->
 
 <h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Plus+Jakarta+Sans&size=35&duration=4000&pause=1000&color=4F46E5&center=true&vCenter=true&width=700&height=70&lines=Hi%2C+I'm+Amit+Bind!;Aspiring+Software+%26+AI+Engineer;Coder+%7C+Creator+%7C+Learner" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Plus+Jakarta+Sans&size=35&duration=4000&pause=1000&color=4F46E5&center=true&vCenter=true&width=700&height=70&lines=Hi%2C+I'm+Amit+Bind!;Aspiring+Software+%26+AI+Engineer;Coder+%7C+Developer+%7C+Learner" />
 </h1>
 
 <p align="center">
